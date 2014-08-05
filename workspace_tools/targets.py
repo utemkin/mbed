@@ -536,6 +536,15 @@ class ARCH_PRO(Target):
         self.supported_form_factors = ["ARDUINO"]
 
 
+class LPC1768_MINI_DK2(Target):
+    def __init__(self):
+        Target.__init__(self)
+        self.core = "Cortex-M3"
+        self.extra_labels = ['NXP', 'LPC176X']
+        self.supported_toolchains = ["ARM", "uARM", "GCC_ARM", "GCC_CS", "GCC_CR", "IAR"]
+        self.macros = ['TARGET_LPC1768']
+
+
 class ARCH_GPRS(LPC11U37_501):
     def __init__(self):
         LPC11U37_501.__init__(self)
@@ -630,6 +639,7 @@ TARGETS = [
     XADOW_M0(),
     ARCH_BLE(),
     ARCH_PRO(),
+    LPC1768_MINI_DK2(),
     ARCH_GPRS(),
     LPCCAPPUCCINO(),
     HRM1017(),

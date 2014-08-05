@@ -31,6 +31,7 @@ class CodeRed(Exporter):
         'LPC11U35_501',
         'UBLOX_C027',
         'ARCH_PRO',
+        'LPC1768_MINI_DK2',
         'LPC1549',
         'LPC11U68',
         'LPCCAPPUCCINO',

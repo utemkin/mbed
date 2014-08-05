@@ -49,6 +49,7 @@ class Uvision4(Exporter):
         'LPC11U35_501',
         'NRF51822',
         'ARCH_PRO',
+        'LPC1768_MINI_DK2',
         'ARCH_BLE',
     ]
 

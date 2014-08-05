@@ -42,6 +42,7 @@ class GccArm(Exporter):
         'DISCO_F303VC',
         'UBLOX_C027',
         'ARCH_PRO',
+        'LPC1768_MINI_DK2',
         'NRF51822',
         'LPC2368',
         'LPCCAPPUCCINO',

@@ -26,6 +26,7 @@ class CodeSourcery(Exporter):
         'LPC1768',
         'UBLOX_C027',
         'ARCH_PRO',
+        'LPC1768_MINI_DK2',
     ]
 
     DOT_IN_RELATIVE_PATH = True
