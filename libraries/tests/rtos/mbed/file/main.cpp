@@ -20,6 +20,9 @@ void sd_thread(void const *argument)
 #elif defined(TARGET_K64F)
     SDFileSystem sd(PTD2, PTD3, PTD1, PTD0, "sd");
 
+#elif defined(TARGET_LPC1768_MINI_DK2)
+    SDFileSystem sd(SD_SDI, SD_SDO, SD_SCK, SD_CS, "sd");
+
 #else
     SDFileSystem sd(p11, p12, p13, p14, "sd");
 #endif
