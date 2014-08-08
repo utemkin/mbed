@@ -82,7 +82,7 @@ class GCC(mbedToolchain):
         self.elf2bin = join(tool_path, "arm-none-eabi-objcopy")
 
     def assemble(self, source, object, includes):
-        self.default_cmd(self.hook.get_cmdline_assembler(self.asm + ['-D%s' % s for s in self.get_symbols() + self.macros] + ["-I%s" % i for i in includes] + ["-o", object, source]))
+        return [self.hook.get_cmdline_assembler(self.asm + ['-D%s' % s for s in self.get_symbols() + self.macros] + ["-I%s" % i for i in includes] + ["-o", object, source])]
 
     def parse_dependencies(self, dep_path):
         dependencies = []
