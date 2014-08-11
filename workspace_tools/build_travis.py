@@ -50,6 +50,7 @@ build_list = (
     { "target": "LPC4088",       "toolchains": "GCC_ARM", "libs": ["dsp", "rtos", "usb", "fat"] },
     { "target": "ARCH_PRO",      "toolchains": "GCC_ARM", "libs": ["dsp", "rtos", "fat"] },
     { "target": "LPC1768_MINI_DK2", "toolchains": "GCC_ARM", "libs": ["dsp", "rtos"] },
+    { "target": "LPC1549",       "toolchains": "GCC_ARM", "libs": ["dsp", "rtos", "fat"] },
 )
 
 ################################################################################
