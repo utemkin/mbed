@@ -376,7 +376,7 @@ class LPC11U35_501(Target):
     def __init__(self):
         Target.__init__(self)
         self.core = "Cortex-M0"
-        self.extra_labels = ['NXP', 'LPC11UXX']
+        self.extra_labels = ['NXP', 'LPC11UXX', 'MCU_LPC11U35_501']
         self.supported_toolchains = ["ARM", "uARM", "GCC_ARM", "GCC_CR"]
         self.default_toolchain = "uARM"
 
@@ -461,7 +461,7 @@ class LPC1549(Target):
         Target.__init__(self)
         self.core = "Cortex-M3"
         self.extra_labels = ['NXP', 'LPC15XX']
-        self.supported_toolchains = ["uARM", "GCC_CR"]
+        self.supported_toolchains = ["uARM", "GCC_CR", "GCC_ARM"]
         self.default_toolchain = "uARM"
         self.supported_form_factors = ["ARDUINO"]
 
@@ -512,11 +512,12 @@ class DISCO_F303VC(Target):
         self.default_toolchain = "uARM"
 
 
-class XADOW_M0(LPC11U35_501):
+class XADOW_M0(Target):
     def __init__(self):
-        LPC11U35_501.__init__(self)
-        self.extra_labels = ['NXP', 'LPC11UXX', 'LPC11U35_501']
-        self.macros = ['TARGET_LPC11U35_501']
+        Target.__init__(self)
+        self.core = "Cortex-M0"
+        self.extra_labels = ['NXP', 'LPC11UXX', 'MCU_LPC11U35_501']
+        self.supported_toolchains = ["ARM", "uARM", "GCC_ARM", "GCC_CR"]
 
 
 class ARCH_BLE(NRF51822):
@@ -524,6 +525,7 @@ class ARCH_BLE(NRF51822):
         NRF51822.__init__(self)
         self.extra_labels = ['NORDIC', 'MCU_NRF51822']
         self.macros = ['TARGET_NRF51822']
+        self.supported_form_factors = ["ARDUINO"]
 
 
 class ARCH_PRO(Target):
@@ -545,9 +547,14 @@ class LPC1768_MINI_DK2(Target):
         self.macros = ['TARGET_LPC1768']
 
 
-class ARCH_GPRS(LPC11U37_501):
+class ARCH_GPRS(Target):
     def __init__(self):
-        LPC11U37_501.__init__(self)
+        Target.__init__(self)
+        self.core = "Cortex-M0"
+        self.extra_labels = ['NXP', 'LPC11UXX', 'LPC11U37_501']
+        self.supported_toolchains = ["ARM", "uARM", "GCC_ARM", "GCC_CR"]
+        self.default_toolchain = "uARM"
+        self.supported_form_factors = ["ARDUINO"]
 
 
 class LPCCAPPUCCINO(LPC11U37_501):
