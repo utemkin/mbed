@@ -63,7 +63,16 @@ class Mbed:
                           dest="forced_reset_type",
                           help="Forces different type of reset")
 
+        parser.add_option("-R", "--reset-timeout",
+                          dest="forced_reset_timeout",
+                          metavar="NUMBER",
+                          type="int",
+                          help="When forcing a reset using option -r you can set up after reset timeout in seconds")
+
         (self.options, _) = parser.parse_args()
+
+        self.DEFAULT_RESET_TOUT = 2
+        self.DEFAULT_TOUT = 10
 
         if self.options.port is None:
             raise Exception("The serial port of the target mbed have to be provided as command line arguments")
@@ -73,10 +82,11 @@ class Mbed:
         self.extra_port = self.options.extra
         self.extra_serial = None
         self.serial = None
-        self.timeout = 10 if self.options.timeout is None else self.options.timeout
+        self.timeout = self.DEFAULT_TOUT if self.options.timeout is None else self.options.timeout
         print 'Mbed: "%s" "%s"' % (self.port, self.disk)
 
     def init_serial(self, baud=9600, extra_baud=9600):
+        """ Initialize serial port. Function will return error is port can't be opened or initialized """
         result = True
         try:
             self.serial = Serial(self.port, timeout=1)
@@ -89,6 +99,14 @@ class Mbed:
                 self.extra_serial = Serial(self.extra_port, timeout = 1)
                 self.extra_serial.setBaudrate(extra_baud)
             self.flush()
+        return result
+
+    def serial_timeout(self, timeout):
+        """ Wraps self.mbed.serial object timeout property """
+        result = None
+        if self.serial:
+            self.serial.timeout = timeout
+            result = True
         return result
 
     def serial_read(self, count=1):
@@ -132,22 +150,27 @@ class Mbed:
                 result = False
         return result
 
-    def touch_file(self, path, name):
-        with os.open(path, 'a'):
+    def touch_file(self, path):
+        with open(path, 'a'):
             os.utime(path, None)
+
+    def reset_timeout(self, timeout):
+        for n in range(0, timeout):
+            sleep(1)
 
     def reset(self):
         """ reboot.txt   - startup from standby state, reboots when in run mode.
             shutdown.txt - shutdown from run mode
-            reset.txt    - reset fpga during run mode """
-        if self.options.forced_reset_type:
-            path = os.path.join([self.disk, self.options.forced_reset_type.lower()])
-            if self.options.forced_reset_type.endswith('.txt'):
-                self.touch_file(path)
+            reset.txt    - reset FPGA during run mode
+        """
+        if self.options.forced_reset_type and self.options.forced_reset_type.endswith('.txt'):
+            reset_file_path = os.path.join(self.disk, self.options.forced_reset_type.lower())
+            self.touch_file(reset_file_path)
         else:
             self.safe_sendBreak(self.serial)  # Instead of serial.sendBreak()
             # Give time to wait for the image loading
-        sleep(2)
+        reset_tout_s = self.options.forced_reset_timeout if self.options.forced_reset_timeout is not None else self.DEFAULT_RESET_TOUT
+        self.reset_timeout(reset_tout_s)
 
     def flush(self):
         self.serial.flushInput()
