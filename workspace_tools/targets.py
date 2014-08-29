@@ -548,6 +548,12 @@ class ARCH_BLE(NRF51822):
         self.macros = ['TARGET_NRF51822']
         self.supported_form_factors = ["ARDUINO"]
 
+class NRF51_DK(NRF51822):
+    def __init__(self):
+        NRF51822.__init__(self)
+        self.extra_labels = ['NORDIC', 'MCU_NRF51822']
+        self.macros = ['TARGET_NRF51822']
+        self.supported_form_factors = ["ARDUINO"]
 
 class ARCH_PRO(LPCTarget):
     def __init__(self):
@@ -604,7 +610,7 @@ class RBLAB_NRF51822(NRF51822):
         NRF51822.__init__(self)
         self.extra_labels = ['NORDIC', 'MCU_NRF51822']
         self.macros = ['TARGET_NRF51822']
-        
+
 
 class OC_MBUINO(LPC11U24):
     def __init__(self):
@@ -614,7 +620,7 @@ class OC_MBUINO(LPC11U24):
         self.macros = ['TARGET_LPC11U24']
         self.supported_toolchains = ["ARM", "uARM", "GCC_ARM"]
         self.default_toolchain = "uARM"
-        
+
 class MTS_GAMBIT(Target):
     def __init__(self):
         Target.__init__(self)
@@ -666,6 +672,7 @@ TARGETS = [
     DISCO_F407VG(),
     XADOW_M0(),
     ARCH_BLE(),
+    NRF51_DK(),
     ARCH_PRO(),
     LPC1768_MINI_DK2(),
     ARCH_GPRS(),
