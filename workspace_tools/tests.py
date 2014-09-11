@@ -287,6 +287,33 @@ TESTS = [
         "dependencies": [MBED_LIBRARIES]
     },
 
+    # performance related tests
+    {
+        "id": "PERF_1", "description": "SD Stdio R/W Speed",
+        "source_dir": join(TEST_DIR, "mbed", "sd_perf_stdio"),
+        "dependencies": [MBED_LIBRARIES, TEST_MBED_LIB, FS_LIBRARY],
+        "automated": True,
+        "duration": 15,
+        "peripherals": ["SD"]
+    },
+    {
+        "id": "PERF_2", "description": "SD FileHandle R/W Speed",
+        "source_dir": join(TEST_DIR, "mbed", "sd_perf_fhandle"),
+        "dependencies": [MBED_LIBRARIES, TEST_MBED_LIB, FS_LIBRARY],
+        "automated": True,
+        "duration": 15,
+        "peripherals": ["SD"]
+    },
+    {
+        "id": "PERF_3", "description": "SD FatFS R/W Speed",
+        "source_dir": join(TEST_DIR, "mbed", "sd_perf_fatfs"),
+        "dependencies": [MBED_LIBRARIES, TEST_MBED_LIB, FS_LIBRARY],
+        "automated": True,
+        "duration": 15,
+        "peripherals": ["SD"]
+    },
+
+
     # Not automated MBED tests
     {
         "id": "MBED_1", "description": "I2C SRF08",
@@ -297,7 +324,7 @@ TESTS = [
     {
         "id": "MBED_2", "description": "stdio",
         "source_dir": join(TEST_DIR, "mbed", "stdio"),
-        "dependencies": [MBED_LIBRARIES],
+        "dependencies": [MBED_LIBRARIES, TEST_MBED_LIB],
         "duration": 20,
         "automated": True,
         "host_test": "stdio_auto"
@@ -482,6 +509,13 @@ TESTS = [
         "id": "MBED_32", "description": "Pin toggling",
         "source_dir": join(TEST_DIR, "mbed", "pin_toggling"),
         "dependencies": [MBED_LIBRARIES],
+    },
+    {
+        "id": "MBED_33", "description": "C string operations",
+        "source_dir": join(TEST_DIR, "mbed", "cstring"),
+        "dependencies": [MBED_LIBRARIES, TEST_MBED_LIB],
+        "duration": 10,
+        "automated": False,
     },
 
     # CMSIS RTOS tests
@@ -693,7 +727,7 @@ TESTS = [
     {
         "id": "NET_13", "description": "TCP client echo loop",
         "source_dir": join(TEST_DIR, "net", "echo", "tcp_client_loop"),
-        "dependencies": [MBED_LIBRARIES, RTOS_LIBRARIES, ETH_LIBRARY],
+        "dependencies": [MBED_LIBRARIES, RTOS_LIBRARIES, ETH_LIBRARY, TEST_MBED_LIB],
         "automated": True,
         "duration": 15,
         "host_test": "tcpecho_client_auto",
