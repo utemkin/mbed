@@ -53,6 +53,7 @@ class Uvision4(Exporter):
         'LPC1768_MINI_DK2',
         'ARCH_BLE',
         'DISCO_F407VG',
+        'MTS_GAMBIT',
     ]
 
     USING_MICROLIB = [

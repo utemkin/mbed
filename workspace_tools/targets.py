@@ -149,7 +149,7 @@ class K64F(Target):
     def __init__(self):
         Target.__init__(self)
         self.core = "Cortex-M4F"
-        self.extra_labels = ['Freescale', 'KPSDK_MCUS', 'KPSDK_CODE', 'FRDM']
+        self.extra_labels = ['Freescale', 'KPSDK_MCUS', 'KPSDK_CODE', 'MCU_K64F', 'FRDM']
         self.macros = ["CPU_MK64FN1M0VMD12", "FSL_RTOS_MBED"]
         self.supported_toolchains = ["ARM", "GCC_ARM"]
         self.supported_form_factors = ["ARDUINO"]
@@ -475,6 +475,16 @@ class NRF51822(Target):
             sdh.tofile(f, format='hex')
 
 
+class NRF51822_OTA(Target):
+    def __init__(self):
+        Target.__init__(self)
+        self.core = "Cortex-M0"
+        self.extra_labels = ["NORDIC", "NRF51822_MKIT", "MCU_NRF51822", "MCU_NORDIC_16K", "NRF51822"]
+        self.macros = ['TARGET_NRF51822']
+        self.supported_toolchains = ["ARM", "GCC_ARM"]
+        self.is_disk_virtual = True
+
+
 class ARCH_BLE(NRF51822):
     def __init__(self):
         NRF51822.__init__(self)
@@ -503,6 +513,16 @@ class NRF51_DK(NRF51822):
         self.extra_labels = ['NORDIC', 'MCU_NRF51822', 'MCU_NORDIC_32K']
         self.macros = ['TARGET_NRF51822']
         self.supported_form_factors = ["ARDUINO"]
+
+
+class NRF51_DK_OTA(Target):
+    def __init__(self):
+        Target.__init__(self)
+        self.core = "Cortex-M0"
+        self.extra_labels = ['NORDIC', 'MCU_NRF51822', 'MCU_NORDIC_32K', "NRF51_DK"]
+        self.macros = ['TARGET_NRF51822', 'TARGET_NRF51_DK']
+        self.supported_toolchains = ["ARM", "GCC_ARM"]
+        self.is_disk_virtual = True
 
 
 class LPC1549(LPCTarget):
@@ -633,9 +653,9 @@ class MTS_GAMBIT(Target):
     def __init__(self):
         Target.__init__(self)
         self.core = "Cortex-M4F"
-        self.extra_labels = ['Freescale', 'KPSDK_MCUS', 'KPSDK_CODE', 'K64F']
+        self.extra_labels = ['Freescale', 'KPSDK_MCUS', 'KPSDK_CODE', 'MCU_K64F']
         self.supported_toolchains = ["ARM", "GCC_ARM"]
-        self.macros = ['TARGET_K64F', "CPU_MK64FN1M0VMD12", "FSL_RTOS_MBED"]
+        self.macros = ["CPU_MK64FN1M0VMD12", "FSL_RTOS_MBED", "TARGET_K64F"]
         self.is_disk_virtual = True
         self.default_toolchain = "ARM"
 
@@ -672,6 +692,7 @@ TARGETS = [
     LPC11U35_401(),
     LPC11U35_501(),
     NRF51822(),
+    NRF51822_OTA(),
     UBLOX_C027(),
     LPC1549(),
     LPC11U68(),
@@ -682,6 +703,7 @@ TARGETS = [
     XADOW_M0(),
     ARCH_BLE(),
     NRF51_DK(),
+    NRF51_DK_OTA(),
     ARCH_PRO(),
     LPC1768_MINI_DK2(),
     ARCH_GPRS(),
