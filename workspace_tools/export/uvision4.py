@@ -26,8 +26,10 @@ class Uvision4(Exporter):
         'LPC11U24',
         'KL05Z',
         'KL25Z',
+        'KL43Z',
         'KL46Z',
         'K64F',
+        'K22F',
         'K20D50M',
         'LPC1347',
         'LPC1114',
@@ -38,6 +40,7 @@ class Uvision4(Exporter):
         'LPC812',
         'NUCLEO_F030R8',
         'NUCLEO_F072RB',
+        'NUCLEO_F091RC',
         'NUCLEO_F103RB',
         'NUCLEO_F302R8',
         'NUCLEO_F334R8',
@@ -47,13 +50,16 @@ class Uvision4(Exporter):
         'NUCLEO_L152RE',
         'UBLOX_C027',
         'LPC1549',
-        'LPC11U35_501',
+        # Removed as uvision4_lpc11u35_501.uvproj.tmpl is missing.
+        #'LPC11U35_501', 
         'NRF51822',
+        'HRM1017',
         'ARCH_PRO',
         'LPC1768_MINI_DK2',
         'ARCH_BLE',
         'DISCO_F407VG',
         'MTS_GAMBIT',
+        'ARCH_MAX',
     ]
 
     USING_MICROLIB = [
@@ -63,6 +69,7 @@ class Uvision4(Exporter):
         'LPC812',
         'NUCLEO_F030R8',
         'NUCLEO_F072RB',
+        'NUCLEO_F091RC',
         'NUCLEO_F103RB',
         'NUCLEO_F302R8',
         'NUCLEO_F334R8',
@@ -82,7 +89,7 @@ class Uvision4(Exporter):
     }
 
     FLAGS = [
-        "--gnu",
+        "--gnu", "--no_rtti",
     ]
 
     # By convention uVision projects do not show header files in the editor:
